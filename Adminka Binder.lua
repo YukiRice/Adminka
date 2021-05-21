@@ -99,9 +99,9 @@ end
 function main()
 if not isSampfuncsLoaded() or not isSampLoaded() then return end
 while not isSampAvailable() do wait(100) end
-autoupdate("тут ссылка на ваш json", '['..string.upper(thisScript().name)..']: ', "тут ссылка на ваш сайт/url вашего скрипта на форуме (если нет, оставьте как в json)")
+autoupdate("https://raw.githubusercontent.com/YukiRice/Adminka/main/update.ini", '['..string.upper(thisScript().name)..']: ', "https://raw.githubusercontent.com/YukiRice/Adminka/main/update.ini")
 apply_custom_style()
-sampAddChatMessage("{FF7F50}>>Adminka Binder<< {FFFFFF}Активация - /adm", -1)
+sampAddChatMessage("{FF7F50}>>Adminka Binder version 2<< {FFFFFF}Активация - /adm", -1)
 sampRegisterChatCommand("adm", cmd_adm)
 imgui.Process = false
 
