@@ -101,7 +101,7 @@ function main()
 if not isSampfuncsLoaded() or not isSampLoaded() then return end
 while not isSampAvailable() do wait(100) end
 apply_custom_style()
-sampAddChatMessage("{FF7F50}>>Adminka Binder<< {FFFFFF}Активация - /adm", -1)
+sampAddChatMessage("{FF7F50}>>Adminka Binder v2<< {FFFFFF}Активация - /adm", -1)
 sampRegisterChatCommand("adm", cmd_adm)
 imgui.Process = false
 
@@ -157,7 +157,7 @@ update_state = false
 local script_vers = 1
 local script_vers_text = "21.05.2021"
 
-local update_url = "" -- тут тоже свою ссылку
+local update_url = "https://raw.githubusercontent.com/YukiRice/Adminka/main/update.ini" -- тут тоже свою ссылку
 local update_path = getWorkingDirectory() .. "/update.ini" -- и тут свою ссылку
 
 local script_url = "" -- тут свою ссылку
