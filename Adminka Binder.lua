@@ -5,6 +5,7 @@ local encoding = require 'encoding'
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
 local inicfg = require 'inicfg'
+local dlstatus = require('moonloader').download_status
 
 local mainIni = inicfg.load({
 config =
@@ -16,7 +17,6 @@ AutoB = false
 local main_window_state = imgui.ImBool(false)
 local two_window_state = imgui.ImBool(false)
 local AutoB = imgui.ImBool(mainIni.config.AutoB)
-local test = imgui.ImInt(100)
 
 
 local status = inicfg.load(mainIni, 'Adminka Binder.ini')
@@ -83,15 +83,13 @@ end
 imgui.SameLine()
 imgui.TextQuestion(u8'Сообщения из биндера буду писаться в чат через /b.')
 
-if imgui.InputInt(u8'', test)
-
 
 imgui.Separator()
 
 if imgui.Button(u8'Сохранить настройки',imgui.ImVec2(-0.1,20)) then
 mainIni.config.AutoB = AutoB.v
 inicfg.save(mainIni, 'Adminka Binder.ini')
-sampAddChatMessage('{FF7F50}>>Adminka Binder<< {FFFFFF}Вы сохранили настройки!', -1) end
+sampAddChatMessage('{FF7F50}>>Adminka Binder v2<< {FFFFFF}Вы сохранили настройки!', -1) end
 
 if imgui.Button(u8'Закрыть окно', imgui.ImVec2(-0.1, 20)) then window() end
 
@@ -102,15 +100,35 @@ end
 function main()
 if not isSampfuncsLoaded() or not isSampLoaded() then return end
 while not isSampAvailable() do wait(100) end
-autoupdate("https://github.com/YukiRice/Adminka/blob/def63baecfa366b5641c0b31febe762f00a13ba7/update.ini", '['..string.upper(thisScript().name)..']: ', "http://vk.com/xkelling")
 apply_custom_style()
 sampAddChatMessage("{FF7F50}>>Adminka Binder<< {FFFFFF}Активация - /adm", -1)
 sampRegisterChatCommand("adm", cmd_adm)
 imgui.Process = false
 
+downloadUrlToFile(update_url, update_path, function(id, status)
+		if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+				updateIni = inicfg.load(nil, update_path)
+				if tonumber(updateIni.info.vers) > script_vers then
+						sampAddChatMessage("Есть обновление! Версия: " .. updateIni.info.vers_text, -1)
+						update_state = true
+				end
+				os.remove(update_path)
+		end
+end)
+
 while true do
 wait(0)
 imgui.Process = main_window_state.v or two_window_state.v
+
+if update_state then
+		downloadUrlToFile(script_url, script_path, function(id, status)
+				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+						sampAddChatMessage("Скрипт успешно обновлен!", -1)
+						thisScript():reload()
+				end
+		end)
+		break
+end
 
 end
 end
@@ -135,61 +153,15 @@ imgui.PopTextWrapPos()
 imgui.EndTooltip() end end
 
 
-function autoupdate(json_url, prefix, url)
-  local dlstatus = require('moonloader').download_status
-  local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
-  if doesFileExist(json) then os.remove(json) end
-  downloadUrlToFile(json_url, json,
-    function(id, status, p1, p2)
-      if status == dlstatus.STATUSEX_ENDDOWNLOAD then
-        if doesFileExist(json) then
-          local f = io.open(json, 'r')
-          if f then
-            local info = decodeJson(f:read('*a'))
-            updatelink = info.updateurl
-            updateversion = info.latest
-            f:close()
-            os.remove(json)
-            if updateversion ~= thisScript().version then
-              lua_thread.create(function(prefix)
-                local dlstatus = require('moonloader').download_status
-                local color = -1
-                sampAddChatMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
-                wait(250)
-                downloadUrlToFile(updatelink, thisScript().path,
-                  function(id3, status1, p13, p23)
-                    if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                      print(string.format('Загружено %d из %d.', p13, p23))
-                    elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                      print('Загрузка обновления завершена.')
-                      sampAddChatMessage((prefix..'Обновление завершено!'), color)
-                      goupdatestatus = true
-                      lua_thread.create(function() wait(500) thisScript():reload() end)
-                    end
-                    if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
-                      if goupdatestatus == nil then
-                        sampAddChatMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
-                        update = false
-                      end
-                    end
-                  end
-                )
-                end, prefix
-              )
-            else
-              update = false
-              print('v'..thisScript().version..': Обновление не требуется.')
-            end
-          end
-        else
-          print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
-          update = false
-        end
-      end
-    end
-  )
-  while update ~= false do wait(100) end
-end
+update_state = false
+local script_vers = 1
+local script_vers_text = "21.05.2021"
+
+local update_url = "" -- тут тоже свою ссылку
+local update_path = getWorkingDirectory() .. "/update.ini" -- и тут свою ссылку
+
+local script_url = "" -- тут свою ссылку
+local script_path = thisScript().path
 
 
 function apply_custom_style()
