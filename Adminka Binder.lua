@@ -23,49 +23,49 @@ local status = inicfg.load(mainIni, 'Adminka Binder.ini')
 if not doesFileExist('moonloader/config/Adminka Binder.ini') then inicfg.save(mainIni, 'Adminka Binder.ini') end
 
 function imgui.OnDrawFrame()
-if main_window_state.v then -- ÷òåíèå è çàïèñü çíà÷åíèÿ òàêîé ïåğåìåííîé îñóùåñòâëÿåòñÿ ÷åğåç ïîëå v (èëè Value)
+if main_window_state.v then -- Ñ‡Ñ‚ĞµĞ½Ğ¸Ğµ Ğ¸ Ğ·Ğ°Ğ¿Ğ¸ÑÑŒ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ñ Ñ‚Ğ°ĞºĞ¾Ğ¹ Ğ¿ĞµÑ€ĞµĞ¼ĞµĞ½Ğ½Ğ¾Ğ¹ Ğ¾ÑÑƒÑ‰ĞµÑÑ‚Ğ²Ğ»ÑĞµÑ‚ÑÑ Ñ‡ĞµÑ€ĞµĞ· Ğ¿Ğ¾Ğ»Ğµ v (Ğ¸Ğ»Ğ¸ Value)
 local sw, sh = getScreenResolution()
 imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 imgui.SetNextWindowSize(imgui.ImVec2(295, 135), imgui.Cond.FirstUseEver)
 imgui.Begin('##adminka', main_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoScrollbar + imgui.WindowFlags.NoTitleBar)
 
 
-if imgui.Button(u8"Âîäà", imgui.ImVec2(90, 20)) then
-if AutoB.v then sampSendChat("/b Àäìèíèñòğàöèÿ íå âûòàñêèâàåò èç âîäû.")
-else sampSendChat("Àäìèíèñòğàöèÿ íå âûòàñêèâàåò èç âîäû.")
+if imgui.Button(u8"Ğ’Ğ¾Ğ´Ğ°", imgui.ImVec2(90, 20)) then
+if AutoB.v then sampSendChat("/b ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ Ğ²Ñ‹Ñ‚Ğ°ÑĞºĞ¸Ğ²Ğ°ĞµÑ‚ Ğ¸Ğ· Ğ²Ğ¾Ğ´Ñ‹.")
+else sampSendChat("ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ Ğ²Ñ‹Ñ‚Ğ°ÑĞºĞ¸Ğ²Ğ°ĞµÑ‚ Ğ¸Ğ· Ğ²Ğ¾Ğ´Ñ‹.")
 end end
 
 imgui.SameLine()
 
-if imgui.Button(u8"Òåõ. ğàçäåë", imgui.ImVec2(90, 20)) then
-if AutoB.v then sampSendChat("/b Íàïèøèòå æàëîáó â òåõíè÷åñêèé ğàçäåë ñåğâåğà.")
-else sampSendChat("Íàïèøèòå æàëîáó â òåõíè÷åñêèé ğàçäåë ñåğâåğà.")
+if imgui.Button(u8"Ğ¢ĞµÑ…. Ñ€Ğ°Ğ·Ğ´ĞµĞ»", imgui.ImVec2(90, 20)) then
+if AutoB.v then sampSendChat("/b ĞĞ°Ğ¿Ğ¸ÑˆĞ¸Ñ‚Ğµ Ğ¶Ğ°Ğ»Ğ¾Ğ±Ñƒ Ğ² Ñ‚ĞµÑ…Ğ½Ğ¸Ñ‡ĞµÑĞºĞ¸Ğ¹ Ñ€Ğ°Ğ·Ğ´ĞµĞ» ÑĞµÑ€Ğ²ĞµÑ€Ğ°.")
+else sampSendChat("ĞĞ°Ğ¿Ğ¸ÑˆĞ¸Ñ‚Ğµ Ğ¶Ğ°Ğ»Ğ¾Ğ±Ñƒ Ğ² Ñ‚ĞµÑ…Ğ½Ğ¸Ñ‡ĞµÑĞºĞ¸Ğ¹ Ñ€Ğ°Ğ·Ğ´ĞµĞ» ÑĞµÑ€Ğ²ĞµÑ€Ğ°.")
 end end
 
 imgui.SameLine()
 
-if imgui.Button(u8"Ôëèï", imgui.ImVec2(90, 20)) then
-if AutoB.v then sampSendChat("/b Àäìèíèñòğàöèÿ íå ôëèïàåò èãğîêîâ. Âû ìîæåòå êóïèòü ïğåäìåò 'Äîìêğàò' â ëşáîé ÀÇÑ.")
-else sampSendChat("Àäìèíèñòğàöèÿ íå ôëèïàåò èãğîêîâ. Âû ìîæåòå êóïèòü ïğåäìåò 'Äîìêğàò' â ëşáîé ÀÇÑ.")
+if imgui.Button(u8"Ğ¤Ğ»Ğ¸Ğ¿", imgui.ImVec2(90, 20)) then
+if AutoB.v then sampSendChat("/b ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ Ñ„Ğ»Ğ¸Ğ¿Ğ°ĞµÑ‚ Ğ¸Ğ³Ñ€Ğ¾ĞºĞ¾Ğ². Ğ’Ñ‹ Ğ¼Ğ¾Ğ¶ĞµÑ‚Ğµ ĞºÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€ĞµĞ´Ğ¼ĞµÑ‚ 'Ğ”Ğ¾Ğ¼ĞºÑ€Ğ°Ñ‚' Ğ² Ğ»ÑĞ±Ğ¾Ğ¹ ĞĞ—Ğ¡.")
+else sampSendChat("ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ Ñ„Ğ»Ğ¸Ğ¿Ğ°ĞµÑ‚ Ğ¸Ğ³Ñ€Ğ¾ĞºĞ¾Ğ². Ğ’Ñ‹ Ğ¼Ğ¾Ğ¶ĞµÑ‚Ğµ ĞºÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€ĞµĞ´Ğ¼ĞµÑ‚ 'Ğ”Ğ¾Ğ¼ĞºÑ€Ğ°Ñ‚' Ğ² Ğ»ÑĞ±Ğ¾Ğ¹ ĞĞ—Ğ¡.")
 end end
 
-if imgui.Button(u8"Ñïàâí", imgui.ImVec2(90, 20)) then
-if AutoB.v then sampSendChat("/b Àäìèíèñòğàöèÿ íå ñïàâíèò èãğîêîâ áåç ïğè÷èíû.")
-else sampSendChat("Àäìèíèñòğàöèÿ íå ñïàâíèò èãğîêîâ áåç ïğè÷èíû.")
+if imgui.Button(u8"Ğ¡Ğ¿Ğ°Ğ²Ğ½", imgui.ImVec2(90, 20)) then
+if AutoB.v then sampSendChat("/b ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ ÑĞ¿Ğ°Ğ²Ğ½Ğ¸Ñ‚ Ğ¸Ğ³Ñ€Ğ¾ĞºĞ¾Ğ² Ğ±ĞµĞ· Ğ¿Ñ€Ğ¸Ñ‡Ğ¸Ğ½Ñ‹.")
+else sampSendChat("ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ ÑĞ¿Ğ°Ğ²Ğ½Ğ¸Ñ‚ Ğ¸Ğ³Ñ€Ğ¾ĞºĞ¾Ğ² Ğ±ĞµĞ· Ğ¿Ñ€Ğ¸Ñ‡Ğ¸Ğ½Ñ‹.")
 end end
 
 imgui.SameLine()
 
-if imgui.Button(u8"Òåëåïîğò", imgui.ImVec2(90, 20)) then
-if AutoB.v then sampSendChat("/b Àäìèíèñòğàöèÿ íå òåëåïîğòèğóåò èãğîêîâ áåç ïğè÷èíû.")
-else sampSendChat("Àäìèíèñòğàöèÿ íå òåëåïîğòèğóåò èãğîêîâ áåç ïğè÷èíû.")
+if imgui.Button(u8"Ğ¢ĞµĞ»ĞµĞ¿Ğ¾Ñ€Ñ‚", imgui.ImVec2(90, 20)) then
+if AutoB.v then sampSendChat("/b ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ Ñ‚ĞµĞ»ĞµĞ¿Ğ¾Ñ€Ñ‚Ğ¸Ñ€ÑƒĞµÑ‚ Ğ¸Ğ³Ñ€Ğ¾ĞºĞ¾Ğ² Ğ±ĞµĞ· Ğ¿Ñ€Ğ¸Ñ‡Ğ¸Ğ½Ñ‹.")
+else sampSendChat("ĞĞ´Ğ¼Ğ¸Ğ½Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ Ğ½Ğµ Ñ‚ĞµĞ»ĞµĞ¿Ğ¾Ñ€Ñ‚Ğ¸Ñ€ÑƒĞµÑ‚ Ğ¸Ğ³Ñ€Ğ¾ĞºĞ¾Ğ² Ğ±ĞµĞ· Ğ¿Ñ€Ğ¸Ñ‡Ğ¸Ğ½Ñ‹.")
 end end
 
 imgui.Separator()
 
-if imgui.Button(u8"Íàñòğîéêè", imgui.ImVec2(-0.1, 20)) then window() end
-if imgui.Button(u8'Âêëş÷èòü êóğñîğ', imgui.ImVec2(-0.1, 20)) then imgui.ShowCursor = true end
-if imgui.Button(u8'Âûêëş÷èòü êóğñîğ', imgui.ImVec2(-0.1, 20)) then imgui.ShowCursor = false end
+if imgui.Button(u8"ĞĞ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸", imgui.ImVec2(-0.1, 20)) then window() end
+if imgui.Button(u8'Ğ’ĞºĞ»ÑÑ‡Ğ¸Ñ‚ÑŒ ĞºÑƒÑ€ÑĞ¾Ñ€', imgui.ImVec2(-0.1, 20)) then imgui.ShowCursor = true end
+if imgui.Button(u8'Ğ’Ñ‹ĞºĞ»ÑÑ‡Ğ¸Ñ‚ÑŒ ĞºÑƒÑ€ÑĞ¾Ñ€', imgui.ImVec2(-0.1, 20)) then imgui.ShowCursor = false end
 
 imgui.End()
 end
@@ -76,24 +76,24 @@ imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, im
 imgui.SetNextWindowSize(imgui.ImVec2(300, 130), imgui.Cond.FirstUseEver)
 imgui.Begin(u8'Adminka-Binder by Rice', main_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoScrollbar)
 
-if imgui.RadioButton(u8"Àâòî /b", AutoB.v) then
+if imgui.RadioButton(u8"ĞĞ²Ñ‚Ğ¾ /b", AutoB.v) then
 	AutoB.v = not AutoB.v
 end
 
 imgui.SameLine()
-imgui.TextQuestion(u8'Ñîîáùåíèÿ èç áèíäåğà áóäó ïèñàòüñÿ â ÷àò ÷åğåç /b.')
+imgui.TextQuestion(u8'Ğ¡Ğ¾Ğ¾Ğ±Ñ‰ĞµĞ½Ğ¸Ñ Ğ¸Ğ· Ğ±Ğ¸Ğ½Ğ´ĞµÑ€Ğ° Ğ±ÑƒĞ´Ñƒ Ğ¿Ğ¸ÑĞ°Ñ‚ÑŒÑÑ Ğ² Ñ‡Ğ°Ñ‚ Ñ‡ĞµÑ€ĞµĞ· /b.')
 
 if imgui.InputInt(u8'', test)
 
 
 imgui.Separator()
 
-if imgui.Button(u8'Ñîõğàíèòü íàñòğîéêè',imgui.ImVec2(-0.1,20)) then
+if imgui.Button(u8'Ğ¡Ğ¾Ñ…Ñ€Ğ°Ğ½Ğ¸Ñ‚ÑŒ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸',imgui.ImVec2(-0.1,20)) then
 mainIni.config.AutoB = AutoB.v
 inicfg.save(mainIni, 'Adminka Binder.ini')
-sampAddChatMessage('{FF7F50}>>Adminka Binder<< {FFFFFF}Âû ñîõğàíèëè íàñòğîéêè!', -1) end
+sampAddChatMessage('{FF7F50}>>Adminka Binder<< {FFFFFF}Ğ’Ñ‹ ÑĞ¾Ñ…Ñ€Ğ°Ğ½Ğ¸Ğ»Ğ¸ Ğ½Ğ°ÑÑ‚Ñ€Ğ¾Ğ¹ĞºĞ¸!', -1) end
 
-if imgui.Button(u8'Çàêğûòü îêíî', imgui.ImVec2(-0.1, 20)) then window() end
+if imgui.Button(u8'Ğ—Ğ°ĞºÑ€Ñ‹Ñ‚ÑŒ Ğ¾ĞºĞ½Ğ¾', imgui.ImVec2(-0.1, 20)) then window() end
 
 imgui.End()
 end
@@ -102,9 +102,9 @@ end
 function main()
 if not isSampfuncsLoaded() or not isSampLoaded() then return end
 while not isSampAvailable() do wait(100) end
-
+autoupdate("https://github.com/YukiRice/Adminka/blob/def63baecfa366b5641c0b31febe762f00a13ba7/update.ini", '['..string.upper(thisScript().name)..']: ', "http://vk.com/xkelling")
 apply_custom_style()
-sampAddChatMessage("{FF7F50}>>Adminka Binder<< {FFFFFF}Àêòèâàöèÿ - /adm", -1)
+sampAddChatMessage("{FF7F50}>>Adminka Binder<< {FFFFFF}ĞĞºÑ‚Ğ¸Ğ²Ğ°Ñ†Ğ¸Ñ - /adm", -1)
 sampRegisterChatCommand("adm", cmd_adm)
 imgui.Process = false
 
@@ -126,13 +126,70 @@ end
 
 
 function imgui.TextQuestion(text)
-imgui.TextDisabled(u8'(Ïîäñêàçêà)')
+imgui.TextDisabled(u8'(ĞŸĞ¾Ğ´ÑĞºĞ°Ğ·ĞºĞ°)')
 if imgui.IsItemHovered() then
 imgui.BeginTooltip()
 imgui.PushTextWrapPos(450)
 imgui.TextUnformatted(text)
 imgui.PopTextWrapPos()
 imgui.EndTooltip() end end
+
+
+function autoupdate(json_url, prefix, url)
+  local dlstatus = require('moonloader').download_status
+  local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
+  if doesFileExist(json) then os.remove(json) end
+  downloadUrlToFile(json_url, json,
+    function(id, status, p1, p2)
+      if status == dlstatus.STATUSEX_ENDDOWNLOAD then
+        if doesFileExist(json) then
+          local f = io.open(json, 'r')
+          if f then
+            local info = decodeJson(f:read('*a'))
+            updatelink = info.updateurl
+            updateversion = info.latest
+            f:close()
+            os.remove(json)
+            if updateversion ~= thisScript().version then
+              lua_thread.create(function(prefix)
+                local dlstatus = require('moonloader').download_status
+                local color = -1
+                sampAddChatMessage((prefix..'ĞĞ±Ğ½Ğ°Ñ€ÑƒĞ¶ĞµĞ½Ğ¾ Ğ¾Ğ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ğµ. ĞŸÑ‹Ñ‚Ğ°ÑÑÑŒ Ğ¾Ğ±Ğ½Ğ¾Ğ²Ğ¸Ñ‚ÑŒÑÑ c '..thisScript().version..' Ğ½Ğ° '..updateversion), color)
+                wait(250)
+                downloadUrlToFile(updatelink, thisScript().path,
+                  function(id3, status1, p13, p23)
+                    if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
+                      print(string.format('Ğ—Ğ°Ğ³Ñ€ÑƒĞ¶ĞµĞ½Ğ¾ %d Ğ¸Ğ· %d.', p13, p23))
+                    elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
+                      print('Ğ—Ğ°Ğ³Ñ€ÑƒĞ·ĞºĞ° Ğ¾Ğ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ñ Ğ·Ğ°Ğ²ĞµÑ€ÑˆĞµĞ½Ğ°.')
+                      sampAddChatMessage((prefix..'ĞĞ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ğµ Ğ·Ğ°Ğ²ĞµÑ€ÑˆĞµĞ½Ğ¾!'), color)
+                      goupdatestatus = true
+                      lua_thread.create(function() wait(500) thisScript():reload() end)
+                    end
+                    if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
+                      if goupdatestatus == nil then
+                        sampAddChatMessage((prefix..'ĞĞ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ğµ Ğ¿Ñ€Ğ¾ÑˆĞ»Ğ¾ Ğ½ĞµÑƒĞ´Ğ°Ñ‡Ğ½Ğ¾. Ğ—Ğ°Ğ¿ÑƒÑĞºĞ°Ñ ÑƒÑÑ‚Ğ°Ñ€ĞµĞ²ÑˆÑƒÑ Ğ²ĞµÑ€ÑĞ¸Ñ..'), color)
+                        update = false
+                      end
+                    end
+                  end
+                )
+                end, prefix
+              )
+            else
+              update = false
+              print('v'..thisScript().version..': ĞĞ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ğµ Ğ½Ğµ Ñ‚Ñ€ĞµĞ±ÑƒĞµÑ‚ÑÑ.')
+            end
+          end
+        else
+          print('v'..thisScript().version..': ĞĞµ Ğ¼Ğ¾Ğ³Ñƒ Ğ¿Ñ€Ğ¾Ğ²ĞµÑ€Ğ¸Ñ‚ÑŒ Ğ¾Ğ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ğµ. Ğ¡Ğ¼Ğ¸Ñ€Ğ¸Ñ‚ĞµÑÑŒ Ğ¸Ğ»Ğ¸ Ğ¿Ñ€Ğ¾Ğ²ĞµÑ€ÑŒÑ‚Ğµ ÑĞ°Ğ¼Ğ¾ÑÑ‚Ğ¾ÑÑ‚ĞµĞ»ÑŒĞ½Ğ¾ Ğ½Ğ° '..url)
+          update = false
+        end
+      end
+    end
+  )
+  while update ~= false do wait(100) end
+end
 
 
 function apply_custom_style()
